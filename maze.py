@@ -95,7 +95,26 @@ class Maze:
             if j < self._nrows - 1 and not self._cells[i][j - 1].visited:
                 possible_directions.append((i, j - 1))
             if len(possible_directions) == 0:
+                self._cells[i][j].draw(canvas=self._win.get_canvs(), fill_color="black")
                 return
-            move_to = random.choice(possible_directions)
+            i_next, j_next = random.choice(possible_directions)
             # todo break walls between cell to move to
+            current_cell = self._cells[i][j]
+            next_cell = self._cells[i_next][j_next]
+            if i_next < i:
+                # move up
+                current_cell.has_top_wall = False
+                next_cell.has_bottom_wall = False
+            if i_next > i:
+                current_cell.has_bottom_wall = False
+                next_cell.has_top_wall = False
+            # move left
+            if j_next < j:
+                current_cell.has_left_wall = False
+                next_cell.has_right_wall = False
+            if j_next > j:
+                current_cell.has_right_wall = False
+                next_cell.has_left_wall = False
+            self._break_walls_r(i_next, j_next)
+
             # move there by recursivley calling break_walls_r
