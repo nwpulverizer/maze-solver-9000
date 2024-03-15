@@ -77,7 +77,10 @@ class Maze:
 
     def _break_walls_r(self, i, j):
         self._cells[i][j].visited = True
+        i = 0
         while True:
+            i += 1
+            print(i)
             possible_directions = []
             # i is cols, j is rows
             # if we are at first col, cannot move left
@@ -92,10 +95,12 @@ class Maze:
                 possible_directions.append((i, j + 1))
             # can only move down if we are not the last rows
             # and below hasn't been visited
-            if j < self._nrows - 1 and not self._cells[i][j - 1].visited:
+            if j <= self._nrows - 1 and not self._cells[i][j - 1].visited:
                 possible_directions.append((i, j - 1))
             if len(possible_directions) == 0:
-                self._cells[i][j].draw(canvas=self._win.get_canvs(), fill_color="black")
+                self._cells[i][j].draw(
+                    canvas=self._win.get_canvas(), fill_color="black"
+                )
                 return
             i_next, j_next = random.choice(possible_directions)
             # todo break walls between cell to move to
