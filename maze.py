@@ -77,7 +77,6 @@ class Maze:
 
     def _break_walls_r(self, i, j):
         self._cells[i][j].visited = True
-        count = 0
         print(f"i: {i}, j: {j}")
         while True:
             possible_directions = []
@@ -90,17 +89,18 @@ class Maze:
             if i < self._ncols - 1 and not self._cells[i + 1][j].visited:
                 possible_directions.append((i + 1, j))
             # if we are at the first row or above is visited, can't go up:
-            if j > 0 and not self._cells[i][j + 1].visited:
-                possible_directions.append((i, j + 1))
+            if j > 0 and not self._cells[i][j - 1].visited:
+                possible_directions.append((i, j - 1))
             # can only move down if we are not the last rows
             # and below hasn't been visited
-            if j < self._nrows - 1 and not self._cells[i][j - 1].visited:
-                possible_directions.append((i, j - 1))
+            if j < self._nrows - 1 and not self._cells[i][j + 1].visited:
+                possible_directions.append((i, j + 1))
             if len(possible_directions) == 0:
                 self._cells[i][j].draw(
                     canvas=self._win.get_canvas(), fill_color="black"
                 )
                 return
+            print(possible_directions)
             i_next, j_next = random.choice(possible_directions)
             # todo break walls between cell to move to
             current_cell = self._cells[i][j]
@@ -109,6 +109,7 @@ class Maze:
                 # move up
                 current_cell.has_top_wall = False
                 next_cell.has_bottom_wall = False
+
             if i_next > i:
                 current_cell.has_bottom_wall = False
                 next_cell.has_top_wall = False
@@ -119,6 +120,6 @@ class Maze:
             if j_next > j:
                 current_cell.has_right_wall = False
                 next_cell.has_left_wall = False
-            self._break_walls_r(i_next, j_next)
 
-            # move there by recursivley calling break_walls_r
+            self._break_walls_r(i_next, j_next)
+            possible_directions.remove((i_next, j_next))
