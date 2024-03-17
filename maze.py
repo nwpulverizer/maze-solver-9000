@@ -78,9 +78,8 @@ class Maze:
     def _break_walls_r(self, i, j):
         self._cells[i][j].visited = True
         count = 0
+        print(f"i: {i}, j: {j}")
         while True:
-            count += 1
-            print(count, i, j)
             possible_directions = []
             # i is cols, j is rows
             # if we are at first col, cannot move left
