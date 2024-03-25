@@ -105,19 +105,21 @@ class Maze:
             # todo break walls between cell to move to
             current_cell = self._cells[i][j]
             next_cell = self._cells[i_next][j_next]
-            if i_next < i:
+            if i_next == i + 1:
                 # move up
                 current_cell.has_top_wall = False
                 next_cell.has_bottom_wall = False
 
-            if i_next > i:
+            # move down
+            if i_next == i - 1:
                 current_cell.has_bottom_wall = False
                 next_cell.has_top_wall = False
             # move left
-            if j_next < j:
+            if j_next == j - 1:
                 current_cell.has_left_wall = False
                 next_cell.has_right_wall = False
-            if j_next > j:
+            # move right
+            if j_next == j + 1:
                 current_cell.has_right_wall = False
                 next_cell.has_left_wall = False
 
