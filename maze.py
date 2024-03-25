@@ -57,7 +57,7 @@ class Maze:
         if not self._animated_once:
             sleeptime = 0.05
         else:
-            sleeptime = 0.0001
+            sleeptime = 0.000
         for i in self._cells:
             for j in i:
                 j.draw(self._win.get_canvas(), "black")
