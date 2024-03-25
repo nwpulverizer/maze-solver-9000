@@ -15,6 +15,7 @@ class Cell:
         self._y2 = y2
         self._center = Point((self._x1 + self._x2) // 2, (self._y1 + self._y2) // 2)
         self.visited = False
+        self.animated_once = False
 
     def draw(self, canvas: Canvas, fill_color: str) -> None:
         if self.has_left_wall:
