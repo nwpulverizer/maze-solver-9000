@@ -19,7 +19,7 @@ no_right.has_right_wall = False
 
 def main():
     win = Window(800, 800)
-    maze = Maze(1, 1, 5, 5, 20, 20, win, 0)
+    maze = Maze(1, 1, 10, 10, 20, 20, win, 0)
     maze._draw_cells()
     maze._break_walls_r(0, 0)
     win.wait_for_close()

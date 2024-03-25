@@ -106,22 +106,22 @@ class Maze:
             current_cell = self._cells[i][j]
             next_cell = self._cells[i_next][j_next]
             if i_next == i + 1:
-                # move up
-                current_cell.has_top_wall = False
-                next_cell.has_bottom_wall = False
-
-            # move down
-            if i_next == i - 1:
-                current_cell.has_bottom_wall = False
-                next_cell.has_top_wall = False
-            # move left
-            if j_next == j - 1:
-                current_cell.has_left_wall = False
-                next_cell.has_right_wall = False
-            # move right
-            if j_next == j + 1:
+                # move right
                 current_cell.has_right_wall = False
                 next_cell.has_left_wall = False
+
+            # move left
+            if i_next == i - 1:
+                current_cell.has_left_wall = False
+                next_cell.has_right_wall = False
+            # move up
+            if j_next == j - 1:
+                current_cell.has_top_wall = False
+                next_cell.has_bottom_wall = False
+            # move down
+            if j_next == j + 1:
+                current_cell.has_bottom_wall = False
+                next_cell.has_top_wall = False
 
             self._break_walls_r(i_next, j_next)
             possible_directions.remove((i_next, j_next))
